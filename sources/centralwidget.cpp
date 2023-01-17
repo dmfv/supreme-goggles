@@ -39,40 +39,36 @@ CentralWidget::CentralWidget(QWidget *parent)
     gridLayout->addWidget(tableWithButtons, 2, 1);
     gridLayout->addLayout(buttonsLayout, 1, 1, 1, 2);
     gridLayout->addWidget(textWithButtonsContainer, 2, 2);
-    //gridLayout->setRowStretch(2, 10);
-    //gridLayout->setRowStretch(2, 10);
-    //gridLayout->setColumnStretch();
 }
 
 void CentralWidget::hideStyleButtonHandler()
 {
-    qInfo("hideStyleButton pushed");
     if (isStyleWindowHidden == false) {
-        hideStyleButton->setText("Hide style panel");
         emit showHideStyleWindowPushed(true);
+        SetStyleWindowHidden(true);
     }
     else {
-        hideStyleButton->setText("Show style panel");
         emit showHideStyleWindowPushed(false);
+        SetStyleWindowHidden(false);
     }
 }
 
 void CentralWidget::hideTableButtonHandler()
 {
-    qInfo("hideTableButton pushed");
     if (tableWithButtons->isHidden()) {
         tableWithButtons->show();
-        hideTableButton->setText("Hide table");
+        tableWithButtons->raise();
+        hideTableButton->setText("Hide table"); // TODO: move this same code to specific class of at least specific function
     }
     else {
         tableWithButtons->hide();
+        tableWithButtons->lower();
         hideTableButton->setText("Show table");
     }
 }
 
 void CentralWidget::hideTextPanelButtonHandler()
 {
-    qInfo("hideTextPanelButton pushed");
     if (textWithButtonsContainer->isHidden()) {
         textWithButtonsContainer->show();
         hideTextPanelButton->setText("Hide text panel");
@@ -93,4 +89,15 @@ void CentralWidget::addTextFieldButtonHandler()
 {
     qInfo("addTextFieldButton pushed");
     textWithButtonsContainer->AddTextField();
+}
+
+void CentralWidget::SetStyleWindowHidden(bool isHidden)
+{
+    isStyleWindowHidden = isHidden;
+    if (isHidden) {
+        hideStyleButton->setText("Show text panel");
+    }
+    else {
+        hideStyleButton->setText("Hide text panel");
+    }
 }

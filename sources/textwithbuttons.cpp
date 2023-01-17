@@ -1,5 +1,7 @@
 #include "textwithbuttons.h"
+
 #include <QDebug>
+
 TextWithButtons::TextWithButtons(const QString& text, QWidget *parent)
     : QWidget{parent}
 {
@@ -15,9 +17,9 @@ TextWithButtons::TextWithButtons(const QString& text, QWidget *parent)
 
     // assignment
     setLayout(gridLayout);
-    gridLayout->addWidget(textEdit, 1, 1, 2, 1);
+    gridLayout->addWidget(textEdit, 1, 1, 3, 1);
     gridLayout->addWidget(okButton, 1, 2, 1, 1);
-    gridLayout->addWidget(closeButton, 2, 2, 1, 1);
+    gridLayout->addWidget(closeButton, 3, 2, 1, 1);
 
     textEdit->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
     okButton->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);

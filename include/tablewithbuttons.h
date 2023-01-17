@@ -14,16 +14,18 @@ public:
 
 signals:
 
+private slots:
+    void addLineToTable();
+    void deleteLineFromTable();
 private:
     QGridLayout* gridLayout;
 
     QTableWidget* tableWidget;
-    //QList<QTableWidgetItem>* tableRows;
 
     QPushButton*  addLineButton;
     QPushButton*  deleteLineButton;
 
-
+    qint32 rowsCounter = 0;
 };
 
 #endif // TABLEWITHBUTTONS

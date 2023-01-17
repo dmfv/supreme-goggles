@@ -29,9 +29,9 @@ private:
     QPushButton* addTextFieldButton;
 signals:
     void message(const QString&); // this signal which should be connected to status bar
-    void showHideStyleWindowPushed(bool isShow);
+    void showHideStyleWindowPushed(bool); // button show/hide style window pushed
 public slots:
-    void SetStyleWindowHidden(bool styleWindowHidden) {isStyleWindowHidden = styleWindowHidden;}
+    void SetStyleWindowHidden(bool);
 private slots:
     void hideStyleButtonHandler();
     void hideTableButtonHandler();

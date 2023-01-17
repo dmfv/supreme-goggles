@@ -1,4 +1,4 @@
-#include "tablewithbuttons.h"
+ #include "tablewithbuttons.h"
 #include <QHeaderView>
 
 TableWithButtons::TableWithButtons(QWidget *parent)
@@ -10,10 +10,12 @@ TableWithButtons::TableWithButtons(QWidget *parent)
 
     tableWidget->setHorizontalHeaderLabels(QStringList() << "Id" << "Parameter" << "Value");
     tableWidget->horizontalHeader()->setSectionResizeMode(1, QHeaderView::Stretch);
-    //tableWidget->removeRow();
 
     addLineButton = new QPushButton("Add line");
     deleteLineButton = new QPushButton("Delete line");
+
+    connect(addLineButton, &QPushButton::clicked, this, &TableWithButtons::addLineToTable);
+    connect(deleteLineButton, &QPushButton::clicked, this, &TableWithButtons::deleteLineFromTable);
 
     // assignment
     setLayout(gridLayout);
@@ -26,4 +28,22 @@ TableWithButtons::TableWithButtons(QWidget *parent)
     QSizePolicy sp_retain = sizePolicy(); // TODO: move this to based class RetainedWidget
     sp_retain.setRetainSizeWhenHidden(true);
     setSizePolicy(sp_retain);
+}
+
+void TableWithButtons::addLineToTable()
+{
+    int row = tableWidget->rowCount(), column = tableWidget->columnCount();
+    tableWidget->insertRow( row );
+    QTableWidgetItem* item0 = new QTableWidgetItem("Id_" + QString::number(rowsCounter));
+    QTableWidgetItem* item1 = new QTableWidgetItem("Parameter_" + QString::number(rowsCounter));
+    QTableWidgetItem* item2 = new QTableWidgetItem("Value_" + QString::number(rowsCounter));
+    ++rowsCounter;
+    tableWidget->setItem(row, 0, item0);
+    tableWidget->setItem(row, 1, item1);
+    tableWidget->setItem(row, 2, item2);
+}
+
+void TableWithButtons::deleteLineFromTable()
+{
+    tableWidget->removeRow(tableWidget->rowCount() - 1);
 }

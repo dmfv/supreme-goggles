@@ -3,6 +3,7 @@
 
 #include <QDockWidget>
 #include <QListWidget>
+#include <QHash>
 
 class StyleWindow : public QDockWidget
 {
@@ -11,10 +12,14 @@ public:
     explicit StyleWindow(const QString& str = "Style", QWidget *parent = nullptr);
 
 signals:
-    void itemClicked(QListWidgetItem *item);
-private:
-    QListWidget* listWidget;
 
+private:
+    void ChangeStyle(QListWidgetItem*);
+    void WriteCurrentStyle();
+
+    QListWidgetItem* currentItem;
+    QListWidget* listWidget;
+    QString configName = "config.ini";
 };
 
 #endif // STYLEWINDOW_H
